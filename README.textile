@@ -3,6 +3,7 @@ h2. Memorize:
 Allows Rails applications to do and control cache of actions.
 With Memorize, you can expires your actions, calling a method in your model (or a CustomClass).
 if you've suffered with Rails _caches_action_ and is tired of trying to expire your cache, Memorize is for you !
+See below my 'code-explanation':
 
 <pre>
 <code>
@@ -47,11 +48,7 @@ Used and tested for *Rails 2.3.x*
 h2. Install
 
 Just execute:
-<pre>
-<code>
-  sudo gem install memorize
-</code>
-</pre>
+<pre><code>  sudo gem install memorize</code></pre>
 
 And add to your environment.
 

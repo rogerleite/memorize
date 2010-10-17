@@ -8,7 +8,7 @@ GEM_VERSION = "0.1.0"
 SUMMARY = "Allows Rails applications to do and control cache of actions"
 AUTHOR = "Roger Leite"
 EMAIL = "roger.barreto@gmail.com"
-HOMEPAGE = "1up4dev.org"
+HOMEPAGE = "http://1up4dev.org"
 
 spec = Gem::Specification.new do |s|
   s.name = GEM

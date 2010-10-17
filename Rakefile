@@ -4,7 +4,7 @@ require 'rake'
 require 'rake/gempackagetask'
  
 GEM = "memorize"
-GEM_VERSION = "0.1.0"
+GEM_VERSION = "0.2.0"
 SUMMARY = "Allows Rails applications to do and control cache of actions"
 AUTHOR = "Roger Leite"
 EMAIL = "roger.barreto@gmail.com"

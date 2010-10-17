@@ -25,6 +25,7 @@ module Memorize
 
     def cache_expires(group, options = {})
       group_key = build_group_key(group, options.delete(:key))
+      (Memorize.cache_store.read(group_key) || []).each { |key| Memorize.cache_store.delete(key) }
       Memorize.cache_store.delete(group_key)
     end
     

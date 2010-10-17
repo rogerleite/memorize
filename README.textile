@@ -30,8 +30,8 @@ See below my 'code-explanation':
   class ArticleSweeper < ActionController::Caching::Sweeper
     observe Article
     def after_save(article)
-      Article.cache_entries(:index).each { |key| Rails.cache.delete(key) }
-      Article.cache_entries(:show, :key => article.slug).each { |key| Rails.cache.delete(key) }
+      Article.cache_expires(:index)
+      Article.cache_expires(:show, :key => article.slug)
   
       Rails.cache.delete("my_key")  #Memorize does not handle custom keys
     end

@@ -44,6 +44,18 @@ module MemorizeAssertions
     assert_equal [], TestCache.cache_entries(:index)
   end
 
+  def test_expires_group_should_delete_cache
+    TestCache.cache_key :index
+    TestCache.cache_key :index, :params => ["category", "html"]
+    TestCache.cache_expires(:index)
+    assert_equal [], TestCache.cache_entries(:index)
+  end
+  def test_expires_group_and_key_param_should_delete_cache
+    TestCache.cache_key :show, :key => "test", :params => ["category", "html"]
+    TestCache.cache_expires(:show, :key => "test")
+    assert_equal [], TestCache.cache_entries(:show, :key => "test")
+  end
+
 end
 
 class MemoryMemorizeTest < Test::Unit::TestCase

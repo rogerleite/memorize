@@ -1,0 +1,78 @@
+h2. Memorize:
+
+Allows Rails applications to do and control cache of actions.
+With Memorize, you can expires your actions, calling a method in your model (or a CustomClass).
+if you've suffered with Rails _caches_action_ and is tired of trying to expire your cache, Memorize is for you !
+
+<pre>
+<code>
+
+  class Article < ActiveRecord::Base
+    extend Memorize::Keys
+    [...]
+  end
+  
+  class TestController < ApplicationController
+  
+    #'classic' case of index, with categories, pagination and format support.
+    memorize_action :index, :key_builder => Article, :params => [:category, :page, :format]
+  
+    #case of id, slug ... etc. Accessing a resource with identification.
+    memorize_action :show,  :key_builder => Article, :key_param => :slug, :params => [:page, :format]
+  
+    #case of 'custom' key, if you want to use a 'home made' solution. (here Memorize don't know how expires)
+    memorize_action :custom, :cache_path => lambda { |controller| "my_key" }
+  
+    [...]
+  end
+  
+  class ArticleSweeper < ActionController::Caching::Sweeper
+    observe Article
+    def after_save(article)
+      Article.cache_entries(:index).each { |key| Rails.cache.delete(key) }
+      Article.cache_entries(:show, :key => article.slug).each { |key| Rails.cache.delete(key) }
+  
+      Rails.cache.delete("my_key")  #Memorize does not handle custom keys
+    end
+  end
+
+</pre>
+</code>
+
+h2. More
+
+Memorize is designed to be simple and objetive.
+Used and tested for *Rails 2.3.x*
+
+h2. Install
+
+Just execute:
+<pre>
+<code>
+  sudo gem install memorize
+</code>
+</pre>
+
+And add to your environment.
+
+*Important*: you can configure Memorize cache_store, adding a _memorize.rb_ to your _config/initializers_. Example:
+
+<pre>
+<code>
+  #Some examples to set Memorize cache_store:
+  Memorize.cache_store = Rails.cache
+  #Memorize.cache_store = ActiveSupport::Cache.lookup_store(:memory_store)
+  #Memorize.cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '127.0.0.1:11211')
+  
+  #Your models can be 'Keys factories'
+  #ActiveRecord::Base.extend Memorize::Keys
+</code>
+</pre>
+
+h2. Bugs and Feedback
+
+If you find any issues, use Github issues tracker.
+
+Copyright (c) 2010 Roger Leite
+"1up4dev":http://1up4dev.org
+

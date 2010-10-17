@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.date = %q{2010-10-16}
   s.email = %q{roger.barreto@gmail.com}
   s.files = ["lib/memorize/action.rb", "lib/memorize/keys.rb", "lib/memorize.rb", "README.textile", "MIT-LICENSE", "Rakefile"]
-  s.homepage = %q{http://1up4dev.org}
+  s.homepage = %q{http://github.com/rogerleite/memorize}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{Allows Rails applications to do and control cache of actions}

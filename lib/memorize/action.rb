@@ -28,6 +28,7 @@ module Memorize
         @key_builder = options.delete(:key_builder)
         @key_param = options.delete(:key_param)
         @key_params = options.delete(:params) || []
+        @cache_options = options
       end
 
       def filter(controller, action)
@@ -48,7 +49,7 @@ module Memorize
       end
 
       def after(cache_path, controller)
-        Memorize.cache_store.write cache_path, controller.response.body
+        Memorize.cache_store.write cache_path, controller.response.body, @cache_options
       end
 
       private
